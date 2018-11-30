@@ -1,0 +1,46 @@
+{% extends 'userprofile/base.html' %}
+
+{% block head %}
+<script>
+document.addEventListener("DOMContentLoaded", ()=>{
+document.getElementById("submit").onclick =()=>{
+    const password2 = document.getElementById("password2").value;
+    const password1 = document.getElementById("password1").value;
+    if (password1 != password2){
+        alert("password must be same");
+        return false;
+    }
+}
+});
+
+</script>
+{% endblock %}
+
+{% block body %}
+{% if message %}
+<div style="margin:20px">{{ message }}</div>
+{% endif %}
+
+<form action="{% url 'userprofile:signup' %}" method="post">
+{% csrf_token %}
+<div class="userform" style="background-color:cyan;margin-top:20px;width:40%">
+<span style="margin-left:20px">UserName:</span><br>
+<input style="margin-left:20px" id="name" required type="text" name="username"/><br><br>
+<div>
+<span style="margin-left:20px">FirstName:</span>
+<span style="margin-left:130px">lastName:</span><br>
+<input style="margin-left:20px" style="margin-right: 20px" required type="text" name="firstname"/>
+
+<input style="margin-left:20px" required type="text" name="lastname"/><br><br>
+</div>
+<span style="margin-left:20px"> Enter Your Email address:</span><br>
+<input required style="margin-left:20px" name="email" type="Email"/><br><br>
+<span style="margin-left:20px">Password:</span>
+<span style="margin-left:135px">ReEnter Password:</span><br>
+<input style="margin-left:20px" id="password1" required type="password" name="password"/>
+<input style="margin-left:20px" id="password2" required type="password" />
+<br><br>
+<input style="margin-left:20px" id="submit" type="Submit" value="Signup"/>
+</div>
+</form>
+{% endblock %}

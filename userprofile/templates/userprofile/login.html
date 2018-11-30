@@ -1,0 +1,36 @@
+{% extends 'userprofile/base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+{% endblock %}
+
+{% block body %}
+{% if message %}
+<div>{{ message }}</div>
+{% endif %}
+
+
+<div class="card">
+
+<h2 style="text-align:center;" class="card-header">
+Pizza Hub User Login
+</h2>
+
+<form class="card-body" action="{% url 'userprofile:login' %}" method="post" style="">
+  {% csrf_token %}
+  <label>Username:</label><br>
+  <input class="form-control" required name="username" type="text"/><br>
+  <label>Password:</label><br>
+  <input class="form-control" required name="password" type="password"/><br><br>
+  <input class="form-control btn btn-primary" type="submit" value="LOGIN"/>
+</form>
+
+<div class="card-footer" style="text-align:center;">
+  <a style="" href="{% url 'userprofile:new_user' %}">Sign Up!</a>
+</div>
+
+</div>
+
+
+
+{% endblock %}

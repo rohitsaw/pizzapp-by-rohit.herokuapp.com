@@ -1,0 +1,74 @@
+{% extends 'userprofile/base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+{% endblock %}
+
+{% block body %}
+{% if message %}
+{{ message }}
+{% endif %}
+
+<div class="card" style="background-color:cyan; padding:10px">
+<h3 class="card-header">Only edit if change is required, Otherwise leave blank</h3>
+
+<form class="card-body" style="margin-left:auto; margin-right:auto" action="{% url 'userprofile:doedit' %}" method="post">
+{% csrf_token %} 
+
+<div class="row form-group" style="margin-bottom:20px;">
+
+<div class="col-6">
+<label>First Name:</label>
+<input class="form-control" style="" name="firstname" placeholder="{{ firstname }}" type="text"/>
+</div>
+
+<div class="col-6">
+<label>Last Name:</label>
+<input class="form-control" style="" name="lastname" placeholder="{{ lastname }}" type="text"/>
+</div>
+
+</div>
+
+<div class="row form-group">
+<div style="margin: 0 auto;">
+<label style="">UserName:</label>
+<input class="form-control" name="username" placeholder="{{ username }}" type="text"/>
+</div>
+</div>
+
+<div class="row form-group">
+<div style="margin: 0 auto;">
+<label style="">Email:</label>
+<input class="form-control" name="email" placeholder="{{ email }}" type="Email"/>
+</div>
+</div>
+
+<div class="row form-group">
+<div style="margin: 0 auto;">
+<label>Password:</label>
+<input class="form-control" name="password" type="password" placeholder="Enter new password"/>
+</div>
+</div>
+
+<div class="row form-group">
+<button class="btn btn-warning" style="margin: 0 auto;">Change it</button>
+</div>
+</form>
+
+<div class="card-footer">
+
+<form style="float:right;" action="{% url 'userprofile:logout' %}" method="post">
+  {% csrf_token %}
+<button class="btn btn-outline-danger" style="">Log out!</button>
+</form>
+
+<form style="float:left;" action="{% url 'userprofile:index' %}" method="post">
+  {% csrf_token %}
+<button class="btn btn-outline-danger" style="">Go back!</button>
+</form>
+
+</div>
+
+
+</div>
+{% endblock %}

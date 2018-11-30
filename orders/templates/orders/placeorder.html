@@ -1,0 +1,36 @@
+{% extends 'orders/base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script>
+
+</script>
+{% endblock %}
+
+
+{% block body %}
+
+{% for i in orders %}
+
+<div class="body" style="border:1px solid black;">
+
+<div class="card-header">
+Orders from {{ i.user }}
+</div>
+
+<div class="card-body">
+{{ i.item }}
+</div>
+
+<div class="card-footer">
+Total Price : ${{ i.price }}
+</div>
+</div>
+
+<br><br>
+{% endfor %}
+
+{% comment %}
+<div class="card-footer">{{ order.price }}</div>
+</div> {% endcomment %}
+{% endblock %}

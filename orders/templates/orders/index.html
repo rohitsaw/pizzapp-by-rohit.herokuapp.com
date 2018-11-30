@@ -1,0 +1,254 @@
+{% extends 'orders/base.html' %}
+
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+{% endblock %}
+
+
+{% block body %}
+
+{% load static %}
+
+
+<div id="menu">
+
+
+<div class="container-fluid" style="background-color:orange">
+<h1 class="display-1" style="font-family:Bitner;text-align:center;">Pizza Hub</h1>
+
+<nav style="padding:10px" class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+ <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+<div class="collapse navbar-collapse" id="collapsibleNavbar">
+<ul class="navbar-nav">
+<li class="nav-item"><a class="nav-link" href="#regular_pizza">Regular Pizza</a></li>
+<li class="nav-item"><a class="nav-link" href="#sicilian_pizza">Sicilian Pizza</a></li>
+<li class="nav-item"><a class="nav-link" href="#toppings">Toppings</a></li>
+<li class="nav-item"><a class="nav-link" href ="#sub">Sub</a></li>
+<li class="nav-item"><a class="nav-link" href="#dinner_platters">Dinner</a></li>
+<li class="nav-item"><a class="nav-link" href="#salad">Salads</a></li>
+<li class="nav-item"><a class="nav-link" href="#pasta">Pasta</a></li>
+</ul>
+<div>
+</nav>
+
+
+<div id="demo" class="carousel slide" data-ride="carousel" height="300px">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul> 
+  <div class="carousel-inner">
+    <div class="carousel-item active" style="width:100%;">
+      <img src="/media/orders/pizza1.jpg" style="width:32%;">
+	  <img src="/media/orders/pizza2.jpg" style="width:32%;">
+	  <img src="/media/orders/pizza3.jpg" style="width:32%;">	  
+    </div>
+    <div class="carousel-item" style="width:100%;">
+      <img src="/media/orders/pizza2.jpg" style="width:32%;">
+	  <img src="/media/orders/pizza3.jpg" style="width:32%;">
+	  <img src="/media/orders/pizza1.jpg" style="width:32%;">
+    </div>
+    <div class="carousel-item" style="width:100%;">
+      <img src="/media/orders/pizza3.jpg" style="width:32%;">
+	  <img src="/media/orders/pizza1.jpg" style="width:32%;">
+	  <img src="/media/orders/pizza2.jpg" style="width:32%;">	  
+    </div>
+  </div>
+
+
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+
+</div>
+
+
+
+</div>
+
+
+
+<div class="container">
+
+<div class="row">
+
+<form sytle="float:left;" action="{% url 'order' %}" method="post">
+{% csrf_token %}
+<button class="btn btn-outline-primary">Order Online</button>
+</form>
+
+<form style="float:left;margin-left:2%" action="{% url 'viewcart' %}" method="post">
+{% csrf_token %}
+<button style="float:right;" class="btn btn-outline-primary">Go to Cart</button>
+</form>
+
+{% if user.is_authenticated %}
+
+<form style="float:right;margin-left:2%" action="{% url 'userprofile:index' %}" method="post">
+{% csrf_token %}
+<button class="btn btn-outline-primary">Profile</button>
+</form>
+
+<form style="float:right;margin-left:2%" action="{% url 'userprofile:logout' %}" method="post">
+{% csrf_token %}
+<button class="btn btn-outline-primary">Logout</button>
+</form>
+{% else %}
+<form style="float:right;margin-left:2%" action="{% url 'userprofile:index' %}" method="post">
+{% csrf_token %}
+<button class="btn btn-outline-primary">Login</button>
+</form>
+{% endif %}
+</div>
+
+<!-- start first row for pizzas -->
+<div class="row">
+<div class="col-sm-6" style="background-color:cyan">
+<table id ="regular_pizza" class="table">
+<tr><th>Regular Pizza</th></tr>
+<tr>
+	<td></td>
+	<td>Small</td>
+	<td>Large</td>
+</tr>
+{% for object in Regular_Pizza %}
+<tr>
+<td width="50%">{{ object.addition }}</td> 
+<td width="30%">{{ object.small }}</td> 
+<td>{{ object.large }}</td>
+</tr>
+{% endfor %}
+</table><br><br>
+</div>
+
+<div class="col-sm-6" style="background-color:pink">
+<table id="sicilian_pizza" class="table">
+<tr><th>Sicilian Pizza</th></tr>
+<tr>
+	<td></td>
+	<td>Small</td>
+	<td>Large</td>
+</tr>
+{% for object in Sicilian_Pizza %}
+<tr>
+<td width="50%">{{ object.addition }}</td> 
+<td width="30%">{{ object.small }}</td> 
+<td>{{ object.large }}</td>
+</tr>
+{% endfor %}
+</table><br><br>
+</div>
+</div>
+<!-- end first row -->
+
+<!-- start second row for toppings -->
+<div class="row">
+<div class="col" style="background-color:yellow;">
+<strong style="margin-left:20px">Available Toppings:</strong>
+<ul id="toppings">
+{% for topping in toppings %}
+<li style="float:left;margin-left:5%;margin-right:5%;width:20%;">{{ topping.available_toppings }}</li>
+{% endfor %}
+</ul>
+</div>
+</div>
+<!-- end second row -->
+
+<!-- start third row for subs-->
+<div class="row">
+<div class="col-sm-6" style="background-color:orange;">
+<table id="sub" class="table">
+<tr><th>subs</th></tr>
+<tr>
+  <td></td>
+  <td>Small</td>
+  <td>Large</td>
+</tr>
+{% for object in Sub %}
+<tr>
+<td width="50%">{{ object.item }}</td>
+<td width="30%">{{ object.small }}</td>
+<td>{{ object.large }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<!-- sepration between inner column of third rows-->
+<div class="col-sm-6">
+<div class="row" style="background-color:cyan;">
+<table id="dinner_platters" class="table">
+<tr><th>Dinner Platters</th></tr>
+<tr>
+  <td></td>
+  <td>Small</td>
+  <td>Large</td>
+</tr>
+{% for object in Dinner_Platters %}
+<tr>
+<td width="50%">{{ object.item }}</td>
+<td width="30%">{{ object.small }}</td>
+<td>{{ object.large }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>  <!-- End row-->
+
+<div class="row">
+<div class="col-sm-6" style="background-color:pink;">
+<table id="salad" class="table">
+<tr><th>Salads</th></tr>
+<tr>
+  <td></td>
+  <td>Price</td>
+</tr>
+{% for object in Salad %}
+<tr>
+  <td>{{ object.item }}</td>
+  <td>{{ object.price }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>    <!-- end col-->
+
+<div class="col-sm-6" style="background-color:pink;">
+<table id="pasta" class="table">
+<tr><th>Pasta</th></tr>
+<tr>
+  <td></td>
+  <td>Price</td>
+</tr>
+{% for object in Pasta %}
+<tr>
+  <td>{{ object.item }}</td>
+  <td>{{ object.price }}</td>
+</tr>
+{% endfor %}
+</table>
+</div>    <!-- end row-->
+</div>  <!-- end third col-->
+
+
+
+
+
+</div>
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,317 @@
+{% extends 'orders/base.html' %}
+
+{% block head %}
+{% load staticfiles%}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> {% endcomment %}
+<script src="{% static 'orders/cart.js' %}"></script>
+
+{% endblock %}
+
+{% block body %}
+<div class="card-header">
+<h3 class="display-3" style="font-family:Bitner;text-align:center;">Pizza Hub</h3>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+  <ul class="navbar-nav">
+
+    <form class="nav-item" action="{% url 'index' %}" method="post">
+    {% csrf_token %}
+      <button class="nav-link btn btn-dark">Menu</button>
+    </form>
+
+    <form class="nav-item" action="{% url 'viewcart' %}" method="post">
+    {% csrf_token %}
+      <button class="nav-link btn btn-dark">ViewCart</button>
+    </form>
+
+    <form class="nav-item" action="{% url 'userprofile:index' %}" method="post">
+    {% csrf_token %}
+      <button class="nav-link btn btn-dark" href="#">Profile</button>
+    </form>
+  </ul>
+  </div>
+
+</nav>
+</div>
+
+<div class="container-fluid" style="background-color:grey;">      <!-- start container-->
+<div class="row">           <!--Start 1st row-->
+
+<div class="col-sm-4">         <!-- Start col-4 -->
+<div class="form-group card" style="padding:5px;background-color:cyan;width:100%;">
+
+<h3 class="card-header">
+Pizza Section
+</h3>
+
+<form method="post">
+ {% csrf_token %}
+
+ <div class="regular_pizza_block" style="margin-top:10px;margin-left:10px;">
+Regular Pizza or Sicilian Pizza?
+<select class="form-control" id="pizza" style="">
+  <option disabled selected value> -- select an option -- </option>
+  <option value="Regular_pizza">Regular Pizza</option>
+  <option value="Sicilian_pizza">Sicilian Pizza</option>
+</select>
+</div>
+
+
+<div style="opacity:0;margin-top:10px;margin-left:10px;" id="size-block">
+Size?
+<select disabled class="form-control" id="size" style="">
+    <option disabled selected value> -- select an option -- </option>
+    <option value="small">Small</option>
+    <option value="large">Large</option>
+</select>
+</div>
+
+
+<div style="opacity:0;margin-top:10px;margin-left:10px;" id="addition-block-for-regular">
+Addition for Regular Pizza?
+<select disabled class="form-control addition" id="addition-for-regular" style="">
+    <option disabled selected value> -- select an option -- </option>
+    {% for item in Regular_Pizza %}
+    <option value="{{ item }}">{{ item }}</option>
+    {% endfor %}
+</select>
+</div>
+
+
+<div style="opacity:0;margin-top:10px;margin-left:10px;" id="addition-block-for-sicilian">
+Addition for Sicilian Pizza?
+<select disabled class="form-control addition" id="addition-for-sicilian" style="">
+    <option disabled selected value> -- select an option -- </option>
+    {% for item in Sicilian_Pizza %}
+    <option value="{{ item }}">{{ item }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+<!--Model Start -->
+<!-- Button to Open the Modal -->
+<div id="button-block" style="opacity:0;margin-top:10px;margin-left:10px;">
+<button disabled  id="toppings" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Select Toppings
+</button>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 id="toppingsheading" class="modal-title">Available Toppings</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form>
+      <ul>
+      {% for item in toppings %}    
+        <li><input value="{{ item }}" name="toppings" type="checkbox">{{ item }}</input</li>
+      {% endfor %}
+      </ul>
+      </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button disabled id="toppingsubmit" type="button" class="btn btn-danger" data-dismiss="modal">Select</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Model close-->
+
+</form>
+
+
+
+<div class="card-footer" style="display:flex;flex-direction:row;">
+<div id="price" style="background-color:yellow;padding:2px;padding-left:4px;width:70%;">
+Pizza Price:
+</div>
+<button style="float:right;" disabled id="addtocart" class="btn btn-primary">Add to Cart</button>
+</div>
+
+</div>  <!-- closing card-->
+
+</div>        <!--end col-4 -->
+
+
+
+<div class ="col-sm-4">    <!--start col-4 -->
+
+<div class="row">     <!-- start 1st internal row-->
+<div class="card" style="padding:5px;background-color:orange;float:left;width:100%;">
+
+<h3 class="card-header">
+Dinner Section
+</h3>
+
+<div style="margin-top:10px;margin-left:10px;">
+Select your order
+<select id="dinner" class="form-control" style=""> 
+<option disabled selected value> -- select an option -- </option>
+{% for item in Dinner_Platters %}
+<option value="{{ item }}">{{ item }}</option>
+{% endfor %}
+</select>
+</div>
+
+
+<div style="margin-top:10px;margin-left:10px;opacity:0;" id="size-block-dinner">
+Size?
+<select disabled class="form-control" id="size-dinner" style="">
+    <option disabled selected value> -- select an option -- </option>
+    <option value="small">Small</option>
+    <option value="large">Large</option>
+</select>
+</div>
+
+<div class="card-footer" style="display:flex;flex-direction:row;">
+<div id="price-dinner" style="float:left;background-color:yellow;padding:5px;width:70%;">
+Price:
+</div>
+<button style="float:right;" disabled id="addtocart-dinner" class="btn btn-primary">Add to Cart</button>
+</div>
+
+</div>  <!-- close card-->
+</div>    <!-- end 1st internal row -->
+
+<div class="row" style="margin-top:10px;">   <!-- start 2nd internal row-->
+
+<div class="card" style="padding:5px;background-color:pink;float:left;width:100%;">
+
+<h3 class="card-header">
+Pasta and Salads
+</h3>
+
+<div style="margin-top:10px;margin-left:10px;" id="pasta-block-dinner">
+Pasta?
+<select class="form-control" id="pasta-dinner" style="">
+    <option disabled selected value> -- select an option -- </option>
+    {% for item in Pasta %}
+      <option data-value="{{ item }}" value="{{ item.price }}">{{ item }}</option>
+    {% endfor %}
+</select>
+</div>
+
+<div style="margin-top:10px;margin-left:10px;" id="salad-block-dinner">
+Salad?
+<select class="form-control" id="salad-dinner" style="">
+    <option disabled selected value> -- select an option -- </option>
+    {% for item in Salad %}
+      <option data-value="{{ item }}" value="{{ item.price }}">{{ item }}</option>
+    {% endfor %}
+</select>
+</div>
+
+<div class="card-footer" style="display:flex;flex-direction:row;">
+<div id="block-pasta-salad" style="float:left;background-color:yellow;padding:5px;width:70%;">
+Price:
+</div>
+<button disabled id="addtocart-pasta-salad" style="float:right;" class="btn btn-primary">Add to Cart</button>
+</div>
+
+</div>      <!-- close card-->
+
+</div>        <!-- end 2nd internal row-->
+</div>      <!-- end col-4 -->
+
+
+<div class="col-sm-4">
+<div class="card" style="padding:5px;background-color:green;float:left;width:100%;">
+
+<h3 class="card-header">
+Sub Section
+</h3>
+
+<div style="margin-top:10px;margin-left:10px;">
+subs
+<select class="form-control" id="sub" style="">
+    <option disabled selected value> -- select an option -- </option>
+    {% for item in Sub %}
+    <option data-small="{{item.small}}" data-large="{{item.large}}" value="{{ item }}">{{ item }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+<div style="margin-top:10px;margin-left:10px;opacity:0;" id="subsizeblock">
+Size?
+<select disabled class="form-control" id="subsize" style="">
+    <option disabled selected value> -- select an option -- </option>
+    <option value="small">Small</option>
+    <option value="large">Large</option>
+</select>
+</div>
+
+
+
+<!-- Button to Open the Modal -->
+<button style="opacity:0;margin-top:10px;margin-left:10px;" disabled id="extrabutton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExtra">
+  Any Extras
+</button>
+
+
+<!-- The Modal -->
+<div class="modal" id="modalExtra">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">$0.5 per item</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <ul>
+      {% for item in Extra %}    
+        <li><input value="{{ item }}" name="extra" type="checkbox">{{ item }}</input</li>
+      {% endfor %}
+      </ul>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button id="extrasubmit" type="button" class="btn btn-danger" data-dismiss="modal">Submit</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="card-footer" style="display:flex;flex-direction:row;">
+<div id="block-sub-price" style="float:left;;background-color:yellow;padding:5px;width:70%;">
+Price:
+</div>
+<button disabled id="addtocart-sub" style="float:right;" class="btn btn-primary">Add to Cart</button>
+</div>
+
+</div>
+</div>
+
+</div>  <!--end row -->
+</div>    <!-- close container-fluid-->
+{% endblock %}
