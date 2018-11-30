@@ -139,12 +139,8 @@ def addtocart(request):
         item['toppings'] = request.POST.getlist('toppings[]')
     if 'cart' not in request.session:
         request.session['cart'] = []
-        print("cart is created")
-    print(request.session['cart'])
     request.session['cart'].append(item)
     request.session.modified = True
-    print("after append")
-    print(request.session['cart'])
     return HttpResponse("success")
     
 
@@ -195,12 +191,9 @@ def addtocart_pasta_salad(request):
     item = request.POST["item"]
     item = json.loads(item)
 
-    print(item)
-    print(type(item))
 
     if 'cart' not in request.session:
         request.session['cart'] = []
-        print("cart is created")
     request.session['cart'].append(item)
     request.session.modified = True
     return HttpResponse("success")
@@ -218,7 +211,6 @@ def addtocart_sub(request):
     item["price"] = request.POST["price"]
     if 'cart' not in request.session:
         request.session['cart'] = []
-        print("cart is created")
     request.session['cart'].append(item)
     request.session.modified = True
     return HttpResponse("success")

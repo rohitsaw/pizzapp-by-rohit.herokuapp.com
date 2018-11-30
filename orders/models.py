@@ -98,7 +98,7 @@ class PlaceOrder(models.Model):
 
 
     def __str__(self):
-        return f"{self.user}- {self.item}- {self.price}"
+        return f"{self.user} - {self.price}"
 
 
 

@@ -123,7 +123,6 @@ $(document).ready(function(){
 
 
                         $("#addtocart").click(function(){
-                            alert("ajax started");
                         $.ajax(
                             {
                             type:"POST",
