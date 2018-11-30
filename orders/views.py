@@ -52,8 +52,13 @@ def viewcart(request):
 
 def orderhistory(request):
     '''Return place order history'''
-    print(request.session['buy'])
-    return render(request, "orders/orderhistory.html", {"buy": request.session['buy']})
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("userprofile:index"))
+    item = list(PlaceOrder.objects.filter(user=request.user))
+    # print(request.user)
+    # if 'buy' not in request.session:
+    #     request.session['buy'] = {}
+    return render(request, "orders/orderhistory.html", {"buy": item})
     
 
 def ajax(request):
