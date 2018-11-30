@@ -10,6 +10,15 @@
 
 {% block body %}
 
+
+<div class="card-header">
+<span>Order History</span>
+<form style="float:right;margin-left:2%" action="{% url 'index' %}" method="post">
+{% csrf_token %}
+<button style="float:left;"  class="btn btn-outline-primary">Go back!</button>
+</form>
+</div>
+
 {% for i in orders %}
 
 <div class="body" style="border:1px solid black;">

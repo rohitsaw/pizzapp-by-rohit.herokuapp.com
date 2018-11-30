@@ -7,30 +7,40 @@
 
 {% block body %}
 
-{% for item in buy %}
-<div class="col-sm-3 card" style="margin-right:3%;margin-bottom:3%;">
+{% if buy %}
+
+<div class="card-header">
+<span>Order History</span>
+<form style="float:right;margin-left:2%" action="{% url 'index' %}" method="post">
+{% csrf_token %}
+<button style="float:left;"  class="btn btn-outline-primary">Go back!</button>
+</form>
+</div>
+
 <div class="card-body">
+{% for i in buy %}
 
-{% for item in buy %}
-
-{% for obj in item %}
-{% for key, value in obj.items %}
-<strong>{{ key }}</strong> : {{ value }}
-{% endfor %}
-{{obj.time}}
-{% endfor %}
-{% endfor %}
-
-{% comment %} {% for key, value in item.items %}
-<div style="margin-bottom:1px;">
-
-<strong>{{ key }}</strong> : {{ value }}
-
+<div class="card" style="border:1px solid black;">
+<div class="card-body">
+{{ i.item }}
 </div>
-{% endfor %} {% endcomment %}
 
+<div class="card-footer">
+Total Price : ${{ i.price }}
 </div>
 </div>
+
+<br><br>
 {% endfor %}
+
+</div>
+{% else %}
+<!-- if cart is empty-->
+<h3>Your Order history is empty</h3>
+<form action="{% url 'order' %}" method="post">
+{% csrf_token %}
+<button class="btn btn-primary">Add item to your Shopping Cart!</button>
+</form>
+{% endif %}
 
 {% endblock %}
