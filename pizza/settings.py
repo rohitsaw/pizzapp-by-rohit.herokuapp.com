@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'pizza.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'ec2-54-225-110-156.compute-1.amazonaws.com',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'd3icg963kscu9r',                      
         'USER': 'beqaeteqeiwwil',
         'PASSWORD': '1acf1f2557e9f9cad7da25d7abd1fd3cd10f4902a132e5ff61cec1470513c2ac',
-        'HOST': '5432',
+        'HOST': 'ec2-54-225-110-156.compute-1.amazonaws.com',
         'PORT': '5432',
     }
 }
