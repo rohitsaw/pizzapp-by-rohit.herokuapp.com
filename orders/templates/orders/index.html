@@ -103,6 +103,19 @@
 <button class="btn btn-outline-primary">Profile</button>
 </form>
 
+{% if user.is_superuser %}
+<form style="float:right;margin-left:2%" action="{% url 'placeorder' %}" method="post">
+{% csrf_token %}
+<button class="btn btn-outline-primary">View All Placed Order</button>
+</form>
+{% else %}
+<form style="float:right;margin-left:2%" action="{% url 'orderhistory' %}" method="post">
+{% csrf_token %}
+<button class="btn btn-outline-primary">Order History</button>
+</form>
+{% endif %}
+
+
 <form style="float:right;margin-left:2%" action="{% url 'userprofile:logout' %}" method="post">
 {% csrf_token %}
 <button class="btn btn-outline-primary">Logout</button>
