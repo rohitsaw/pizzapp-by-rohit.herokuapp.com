@@ -95,7 +95,7 @@
 
 <div class="row">
 
-<form sytle="float:left;margin-top:2px;margin-bottom:2px;" action="{% url 'order' %}" method="post">
+<form sytle="float:left;" action="{% url 'order' %}" method="post">
 {% csrf_token %}
 <button class="btn btn-outline-primary">Order Online</button>
 </form>
@@ -269,14 +269,37 @@
 </table>
 </div>    <!-- end row-->
 </div>  <!-- end third col-->
-
-
-
-
-
 </div>
 
 </div>
+
+<!-- footer-->
+<div class="container-fluid row" style="background-color:rgb(240, 236, 236);">
+    <footer class="footer text-center"  style="float: none; margin: 0 auto;margin-top:10px;">
+
+        <p class="footer-note">Made with
+            <i class="fa fa-heart heart" style="color: #ec3e2e; margin-left:3px;margin-right:3px;"></i> by Rohit
+            <br>rsaw409@gmail.com
+        </p>
+
+        <div class="contact-logo-holder">
+
+            <a href="https://github.com/rohitsaw" style="color: #2e3c49; margin-left:3px;margin-right:3px;" target="_blank">
+                  <i class="fa fa-github fa-2x contact-logo github"></i>
+              </a>
+
+            <a href="https://www.linkedin.com/in/rohit-saw-2ab67180/" style="color: #0077b5;margin-left:3px;margin-right:3px;" target="_blank">
+                  <i class="fa fa-linkedin fa-2x contact-logo linkedin"></i>
+            </a>
+
+            <a href="https://www.facebook.com/rohit.saw.106/" style="color:#3b5998; margin-left:2px;margin-right:2px;" target="_blank">
+                  <i class="fa fa-facebook fa-2x contact-logo facebook"></i>
+            </a>
+
+        </div>
+    </footer>
+</div>
+
 
 {% endblock %}
 
