@@ -169,19 +169,21 @@
 <!-- end first row -->
 
 <!-- start second row for toppings -->
-<div class="row">
-<div class="col" style="background-color:yellow;">
+<div class="row" style="background-color:yellow;">
+{% comment %} <div class="col"> {% endcomment %}
 <strong style="margin-left:20px">Available Toppings:</strong>
-<ul id="toppings">
+<ul id="toppings" style="display: inline-block;">
 {% for topping in toppings %}
 
-  <li style="float:left;margin-left:2%;margin-right:2%;width:20%;">
-    <div>{{ topping.available_toppings }}</div>
+  <div style="float:left;width:30%;">
+  <li style="padding:2%;">
+    {{ topping.available_toppings }}
   </li>
+  </div>
 
 {% endfor %}
 </ul>
-</div>
+{% comment %} </div> {% endcomment %}
 </div>
 <!-- end second row -->
 
