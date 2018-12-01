@@ -140,138 +140,145 @@
 
 <!-- start first row for pizzas -->
 <div class="row">
-<div class="col-sm-6" style="background-color:cyan">
-<table id ="regular_pizza" class="table">
-<tr><th>Regular Pizza</th></tr>
-<tr>
-	<td></td>
-	<td>Small</td>
-	<td>Large</td>
-</tr>
-{% for object in Regular_Pizza %}
-<tr>
-<td width="50%">{{ object.addition }}</td> 
-<td width="30%">{{ object.small }}</td> 
-<td>{{ object.large }}</td>
-</tr>
-{% endfor %}
-</table><br><br>
-</div>
+  <div class="col-sm-6" style="background-color:cyan">
+    <table id ="regular_pizza" class="table">
+      <tr>
+        <th>Regular Pizza</th>
+      </tr>
+      <tr>
+	      <td></td>
+	      <td>Small</td>
+	      <td>Large</td>
+      </tr>
 
-<div class="col-sm-6" style="background-color:pink">
-<table id="sicilian_pizza" class="table">
-<tr><th>Sicilian Pizza</th></tr>
-<tr>
-	<td></td>
-	<td>Small</td>
-	<td>Large</td>
-</tr>
-{% for object in Sicilian_Pizza %}
-<tr>
-<td width="50%">{{ object.addition }}</td> 
-<td width="30%">{{ object.small }}</td> 
-<td>{{ object.large }}</td>
-</tr>
-{% endfor %}
-</table><br><br>
-</div>
+    {% for object in Regular_Pizza %}
+      <tr>  
+        <td width="50%">{{ object.addition }}</td> 
+        <td width="30%">{{ object.small }}</td> 
+        <td>{{ object.large }}</td>
+      </tr>
+    {% endfor %}
+    </table><br><br>
+  </div>
+
+  <div class="col-sm-6" style="background-color:pink">
+    <table id="sicilian_pizza" class="table">
+      <tr>
+        <th>Sicilian Pizza</th>
+      </tr>
+      <tr>
+	      <td></td>
+	      <td>Small</td>
+	      <td>Large</td>
+      </tr>
+    {% for object in Sicilian_Pizza %}
+      <tr>
+        <td width="50%">{{ object.addition }}</td> 
+        <td width="30%">{{ object.small }}</td> 
+        <td>{{ object.large }}</td>
+      </tr>
+    {% endfor %}
+    </table><br><br>
+  </div>
 </div>
 <!-- end first row -->
 
 <!-- start second row for toppings -->
 <div class="row" style="background-color:yellow;">
-{% comment %} <div class="col"> {% endcomment %}
-<strong style="margin-left:20px">Available Toppings:</strong>
-<ul id="toppings" style="display: inline-block;">
-{% for topping in toppings %}
+  <strong style="margin-left:20px">Available Toppings:</strong>
+  <ul id="toppings" style="display: inline-block;">
+    {% for topping in toppings %}
 
-  <div style="padding:2%;float:left;width:30%;">
-  <li style="">
-    {{ topping.available_toppings }}
-  </li>
-  </div>
+      <div style="padding:2%;float:left;width:30%;">
+        <li style="">
+          {{ topping.available_toppings }}
+        </li>
+      </div>
 
-{% endfor %}
-</ul>
-{% comment %} </div> {% endcomment %}
+    {% endfor %}
+  </ul>
 </div>
 <!-- end second row -->
 
 <!-- start third row for subs-->
 <div class="row">
-<div class="col-sm-6" style="background-color:orange;">
-<table id="sub" class="table">
-<tr><th>subs</th></tr>
-<tr>
-  <td></td>
-  <td>Small</td>
-  <td>Large</td>
-</tr>
-{% for object in Sub %}
-<tr>
-<td width="50%">{{ object.item }}</td>
-<td width="30%">{{ object.small }}</td>
-<td>{{ object.large }}</td>
-</tr>
-{% endfor %}
-</table>
-</div>
+  <div class="col-sm-6" style="background-color:orange;">
+    <table id="sub" class="table">
+      <tr>
+        <th>subs</th>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Small</td>
+        <td>Large</td>
+      </tr>
+      {% for object in Sub %}
+      <tr>
+        <td width="50%">{{ object.item }}</td>
+        <td width="30%">{{ object.small }}</td>
+        <td>{{ object.large }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
 <!-- sepration between inner column of third rows-->
-<div class="col-sm-6">
-<div class="row" style="background-color:cyan;">
-<table id="dinner_platters" class="table">
-<tr><th>Dinner Platters</th></tr>
-<tr>
-  <td></td>
-  <td>Small</td>
-  <td>Large</td>
-</tr>
-{% for object in Dinner_Platters %}
-<tr>
-<td width="50%">{{ object.item }}</td>
-<td width="30%">{{ object.small }}</td>
-<td>{{ object.large }}</td>
-</tr>
-{% endfor %}
-</table>
-</div>  <!-- End row-->
+  <div class="col-sm-6">
+    <div class="row" style="background-color:cyan;">
+      <table id="dinner_platters" class="table">
+        <tr><th>Dinner Platters</th></tr>
+        <tr>
+          <td></td>
+          <td>Small</td>
+          <td>Large</td>
+        </tr>
+        {% for object in Dinner_Platters %}
+        <tr>
+          <td width="50%">{{ object.item }}</td>
+          <td width="30%">{{ object.small }}</td>
+          <td>{{ object.large }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>  <!-- End row-->
 
-<div class="row">
-<div class="col-sm-6" style="background-color:pink;">
-<table id="salad" class="table">
-<tr><th>Salads</th></tr>
-<tr>
-  <td></td>
-  <td>Price</td>
-</tr>
-{% for object in Salad %}
-<tr>
-  <td>{{ object.item }}</td>
-  <td>{{ object.price }}</td>
-</tr>
-{% endfor %}
-</table>
-</div>    <!-- end col-->
+    <div class="row">
+      <div class="col-sm-6" style="background-color:pink;">
+      <table id="salad" class="table">
+        <tr><th>Salads</th></tr>
+        <tr>
+          <td></td>
+          <td>Price</td>
+        </tr>
+        {% for object in Salad %}
+        <tr>
+          <td>{{ object.item }}</td>
+          <td>{{ object.price }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      </div>    <!-- end col-->
 
-<div class="col-sm-6" style="background-color:pink;">
-<table id="pasta" class="table">
-<tr><th>Pasta</th></tr>
-<tr>
-  <td></td>
-  <td>Price</td>
-</tr>
-{% for object in Pasta %}
-<tr>
-  <td>{{ object.item }}</td>
-  <td>{{ object.price }}</td>
-</tr>
-{% endfor %}
-</table>
-</div>    <!-- end row-->
-</div>  <!-- end third col-->
+    <div class="col-sm-6" style="background-color:pink;">
 
-</div>
+    <table id="pasta" class="table">
+      <tr><th>Pasta</th></tr>
+      <tr>
+        <td></td>
+        <td>Price</td>
+      </tr>
+      {% for object in Pasta %}
+      <tr>
+        <td>{{ object.item }}</td>
+        <td>{{ object.price }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    </div>    <!-- end row-->
+
+  </div>  <!-- end third col-->
+
+  </div>
 </div>
 
 <!-- footer-->
