@@ -174,7 +174,11 @@
 <strong style="margin-left:20px">Available Toppings:</strong>
 <ul id="toppings">
 {% for topping in toppings %}
-<li style="float:left;margin-left:5%;margin-right:5%;width:20%;">{{ topping.available_toppings }}</li>
+
+  <li style="float:left;margin-left:5%;margin-right:5%;width:20%;">
+    <div>{{ topping.available_toppings }}</div>
+  </li>
+
 {% endfor %}
 </ul>
 </div>
