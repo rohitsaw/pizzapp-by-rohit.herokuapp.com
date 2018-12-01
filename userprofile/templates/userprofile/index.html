@@ -36,22 +36,26 @@
 
 </div>
 
-<div class="card-footer row">
+<div class="card-footer container">
 
-<form class="col-sm-12 col-lg-4" style="float:left;width:20%;" action="{% url 'index' %}" method="post">
+<div class="row">
+
+<form class="col-sm-12 col-lg-4" style="" action="{% url 'index' %}" method="post">
   {% csrf_token %}
-<button style="float:left;" class="btn btn-danger">Go back!</button>
+<button style="" class="btn btn-danger">Go back!</button>
 </form>
 
-<form class="col-sm-12 col-lg-4" style="float:left;width:60%;" action="{% url 'userprofile:editprofile' %}" method="post">
+<form class="col-sm-12 col-lg-4" style="" action="{% url 'userprofile:editprofile' %}" method="post">
 {% csrf_token %}
-<button style="position:relative;left:38%;" class="btn btn-primary">edit Profile</button>
+<button style="" class="btn btn-primary">edit Profile</button>
 </form>
 
-<form class="col-sm-12 col-lg-4" style="float:right;width:20%;" action="{% url 'userprofile:logout' %}" method="post">
+<form class="col-sm-12 col-lg-4" style="" action="{% url 'userprofile:logout' %}" method="post">
   {% csrf_token %}
-<button style="float:right;" class="btn btn-danger">Log out!</button>
+<button style="" class="btn btn-danger">Log out!</button>
 </form>
+
+</div>
 
 </div>
 {% endblock %}
