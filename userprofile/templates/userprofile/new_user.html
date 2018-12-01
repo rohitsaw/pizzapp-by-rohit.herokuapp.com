@@ -1,6 +1,10 @@
 {% extends 'userprofile/base.html' %}
 
 {% block head %}
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 <script>
 document.addEventListener("DOMContentLoaded", ()=>{
 document.getElementById("submit").onclick =()=>{
@@ -12,35 +16,65 @@ document.getElementById("submit").onclick =()=>{
     }
 }
 });
-
 </script>
 {% endblock %}
 
 {% block body %}
+
+
+<div class="card"  style="background-color:cyan; padding:10px">
+
 {% if message %}
-<div style="margin:20px">{{ message }}</div>
+<h3 class="card-heading">{{ message }}</h3>
 {% endif %}
 
-<form action="{% url 'userprofile:signup' %}" method="post">
+<form class="card-body" style="margin-left:auto; margin-right:auto" action="{% url 'userprofile:signup' %}" method="post">
 {% csrf_token %}
-<div class="userform" style="background-color:cyan;margin-top:20px;width:40%">
-<span style="margin-left:20px">UserName:</span><br>
-<input style="margin-left:20px" id="name" required type="text" name="username"/><br><br>
-<div>
-<span style="margin-left:20px">FirstName:</span>
-<span style="margin-left:130px">lastName:</span><br>
-<input style="margin-left:20px" style="margin-right: 20px" required type="text" name="firstname"/>
+<div class="userform container">
+  
+  <div class="row">
+    <div class="col-12">
+      <span style="">UserName:</span><br>
+      <input style="" id="name" required type="text" name="username"/>
+    </div>
+  </div>
+  
+  <div class="row">
+      <div class="col-6">
+        <span style="">FirstName:</span>
+        <input style="" style="" required type="text" name="firstname"/>
+      </div>
+    </div class="col-6">
+      <span style="">lastName:</span>
+      <input style="" required type="text" name="lastname"/>
+    </div>
+  </div>
 
-<input style="margin-left:20px" required type="text" name="lastname"/><br><br>
+  <div class="row">
+    <div class="col-12">
+      <span style=""> Enter Your Email address:</span><br>
+      <input required style="" name="email" type="Email"/><br><br>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-6">
+    <span style="">Password:</span>
+      <input style="" id="password1" required type="password" name="password"/>
+    </div>
+  
+    </div>
+    <div class="col-6">
+      <span style="">ReEnter Password:</span>
+    <input style="" id="password2" required type="password" />
+    </div>
+  </div>
+  
 </div>
-<span style="margin-left:20px"> Enter Your Email address:</span><br>
-<input required style="margin-left:20px" name="email" type="Email"/><br><br>
-<span style="margin-left:20px">Password:</span>
-<span style="margin-left:135px">ReEnter Password:</span><br>
-<input style="margin-left:20px" id="password1" required type="password" name="password"/>
-<input style="margin-left:20px" id="password2" required type="password" />
+
+
 <br><br>
-<input style="margin-left:20px" id="submit" type="Submit" value="Signup"/>
-</div>
+<input class="btn btn-success" style="margin-left:35%;" id="submit" type="Submit" value="Signup"/>
 </form>
+</div>
 {% endblock %}
