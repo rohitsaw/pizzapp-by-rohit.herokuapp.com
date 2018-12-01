@@ -30,25 +30,25 @@
 </div><br><br>
 
 <div class="row">
-<div class="col-sm-6"><strong style="">Email:</strong></div>
-<div class="col-sm-6">{{ email }}</div>
+<div class="col-sm-6 text-center"><strong style="">Email:</strong></div>
+<div class="col-sm-6 text-center">{{ email }}</div>
 </div>
 
 </div>
 
-<div class="card-footer">
+<div class="card-footer row">
 
-<form class="form-group" style="float:left;width:20%;" action="{% url 'index' %}" method="post">
+<form class="col-sm-12 col-lg-4" style="float:left;width:20%;" action="{% url 'index' %}" method="post">
   {% csrf_token %}
 <button style="float:left;" class="btn btn-danger">Go back!</button>
 </form>
 
-<form class="form-group" style="float:left;width:60%;" action="{% url 'userprofile:editprofile' %}" method="post">
+<form class="col-sm-12 col-lg-4" style="float:left;width:60%;" action="{% url 'userprofile:editprofile' %}" method="post">
 {% csrf_token %}
 <button style="position:relative;left:38%;" class="btn btn-primary">edit Profile</button>
 </form>
 
-<form class="form-group" style="float:right;width:20%;" action="{% url 'userprofile:logout' %}" method="post">
+<form class="col-sm-12 col-lg-4" style="float:right;width:20%;" action="{% url 'userprofile:logout' %}" method="post">
   {% csrf_token %}
 <button style="float:right;" class="btn btn-danger">Log out!</button>
 </form>
