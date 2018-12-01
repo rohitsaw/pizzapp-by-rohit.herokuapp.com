@@ -40,17 +40,17 @@
 
 <div class="row">
 
-<form class="col-sm-12 col-lg-4" style="" action="{% url 'index' %}" method="post">
+<form class="col-sm-12 col-lg-4 text-center" style="" action="{% url 'index' %}" method="post">
   {% csrf_token %}
 <button style="" class="btn btn-danger">Go back!</button>
 </form><br>
 
-<form class="col-sm-12 col-lg-4" style="" action="{% url 'userprofile:editprofile' %}" method="post">
+<form class="col-sm-12 col-lg-4 text-center" style="" action="{% url 'userprofile:editprofile' %}" method="post">
 {% csrf_token %}
 <button style="" class="btn btn-primary">edit Profile</button>
 </form><br>
 
-<form class="col-sm-12 col-lg-4" style="" action="{% url 'userprofile:logout' %}" method="post">
+<form class="col-sm-12 col-lg-4 text-center" style="" action="{% url 'userprofile:logout' %}" method="post">
   {% csrf_token %}
 <button style="" class="btn btn-danger">Log out!</button>
 </form><br>
